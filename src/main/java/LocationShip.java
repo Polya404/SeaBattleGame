@@ -2,16 +2,24 @@ import java.util.Scanner;
 
 public class LocationShip {
     private static Scanner scanner = new Scanner(System.in);
-    private static int[][] battlefield1 = new int[10][10];
-    private static int[][] battlefield2 = new int[10][10];
-    private static int x;
-    private static int y;
     private static int direction;
 
-    public static void placeShips(int[][] battlefield) {
+    public static void placeShips(String name, int[][] battlefield) {
         int deck = 4;
         while (deck >= 1) {
-            question(deck);
+            System.out.println(name + " please place your " + deck + "-deck ships on the battlefield");
+            System.out.println();
+
+            drawField(battlefield);
+
+            System.out.println("Please enter OX coordinate: ");
+            int x = scanner.nextInt();
+            System.out.println("Please enter OY coordinate: ");
+            int y = scanner.nextInt();
+            System.out.println("Choose direction: ");
+            System.out.println("1. Vertical.");
+            System.out.println("2. Horizontal.");
+            direction = scanner.nextInt();
             for (int i = 0; i < deck; i++) {
                 if (direction == 1) {
                     battlefield[x][y + i] = 1;
@@ -21,22 +29,6 @@ public class LocationShip {
             }
             deck--;
         }
-    }
-
-    private static void question(int i ){
-        System.out.println("Please place your " + i + "-deck ships on the battlefield");
-        System.out.println();
-
-        drawField(battlefield1);
-
-        System.out.println("Please enter OX coordinate: ");
-        x = scanner.nextInt();
-        System.out.println("Please enter OY coordinate: ");
-        y = scanner.nextInt();
-        System.out.println("Choose direction: ");
-        System.out.println("1. Vertical.");
-        System.out.println("2. Horizontal.");
-        direction = scanner.nextInt();
     }
 
 
