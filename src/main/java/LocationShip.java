@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LocationShip {
@@ -20,6 +21,10 @@ public class LocationShip {
             System.out.println("1. Vertical.");
             System.out.println("2. Horizontal.");
             direction = scanner.nextInt();
+            if (!Service.isAvailable(x, y, deck, direction, battlefield)) {
+                System.out.println("Wrong coordinates");
+                continue;
+            }
             for (int i = 0; i < deck; i++) {
                 if (direction == 1) {
                     battlefield[x][y + i] = 1;
@@ -28,6 +33,15 @@ public class LocationShip {
                 }
             }
             deck--;
+            clearConsole();
+        }
+    }
+
+    protected static void clearConsole() {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -39,7 +53,7 @@ public class LocationShip {
             for (int j = 0; j < battlefield[1].length; j++) {
                 if (battlefield[j][i] == 0) {
                     System.out.print("- ");
-                }else {
+                } else {
                     System.out.print("X ");
                 }
             }
