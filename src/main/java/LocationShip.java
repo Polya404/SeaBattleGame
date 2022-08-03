@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LocationShip {
@@ -23,6 +24,28 @@ public class LocationShip {
             direction = scanner.nextInt();
             if (!Service.isAvailable(x, y, deck, direction, battlefield)) {
                 System.out.println("Wrong coordinates");
+                continue;
+            }
+            for (int i = 0; i < deck; i++) {
+                if (direction == 1) {
+                    battlefield[x][y + i] = 1;
+                } else {
+                    battlefield[x + i][y] = 1;
+                }
+            }
+            deck--;
+            clearConsole();
+        }
+    }
+
+    public static void placeShips(int[][] battlefield) {
+        Random random = new Random();
+        int deck = 4;
+        while (deck >= 1) {
+            int x = random.nextInt(10);
+            int y = random.nextInt(10);
+            direction = random.nextInt(2)+1;
+            if (!Service.isAvailable(x, y, deck, direction, battlefield)) {
                 continue;
             }
             for (int i = 0; i < deck; i++) {

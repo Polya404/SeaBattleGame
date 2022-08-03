@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Service {
@@ -41,6 +42,37 @@ public class Service {
         }
     }
 
+    private static void makeTurn(int[][] monitor, int[][] battlefield) {
+        Random random = new Random();
+        while (true) {
+            System.out.println("  0 1 2 3 4 5 6 7 8 9");
+            for (int i = 0; i < monitor.length; i++) {
+                System.out.print(i + " ");
+                for (int j = 0; j < monitor[1].length; j++) {
+                    if (monitor[j][i] == 0) {
+                        System.out.print("- ");
+                    } else if (monitor[j][i] == 1) {
+                        System.out.print(". ");
+                    } else {
+                        System.out.print("X ");
+                    }
+                }
+                System.out.println();
+            }
+            int x = random.nextInt(10);
+            int y = random.nextInt(10);
+
+            if (battlefield[x][y] == 1) {
+                monitor[x][y] = 2;
+            } else {
+                System.out.println("Computer miss! Your turn");
+                monitor[x][y] = 1;
+                break;
+            }
+            LocationShip.clearConsole();
+        }
+    }
+
     public static void game(String playerName1, String playerName2) {
         LocationShip.placeShips(playerName1, battlefield1);
         LocationShip.placeShips(playerName2, battlefield2);
@@ -51,6 +83,21 @@ public class Service {
             }
             makeTurn(playerName2, monitor2, battlefield1);
             if (isWinCondition(playerName1, playerName2)) {
+                break;
+            }
+        }
+    }
+
+    public static void gameWithComputer(String playerName, String comp) {
+        LocationShip.placeShips(playerName, battlefield1);
+        LocationShip.placeShips(battlefield2);
+        while (true) {
+            makeTurn(playerName, monitor1, battlefield2);
+            if (isWinCondition(playerName, comp)) {
+                break;
+            }
+            makeTurn(monitor2, battlefield1);
+            if (isWinCondition(playerName, comp)) {
                 break;
             }
         }
