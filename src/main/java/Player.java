@@ -1,8 +1,14 @@
 public class Player {
    private String name;
-   private int win;
+   private int win = 0;
    private int loss;
 
+    public Player() {
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
