@@ -30,7 +30,7 @@ public class Service {
             if (battlefield[x][y] == 1) {
                 System.out.println("Hit! Make your turn again");
                 monitor[x][y] = 2;
-            } else if (monitor[x][y] == 1 && !(count1 < 10 | count2 < 10)) {
+            } else if (monitor[x][y] == 1 | !(count1 < 10 | count2 < 10)) {
                 System.out.println("You've been here before");
                 makeTurn(name, monitor, battlefield);
             } else {
@@ -58,7 +58,7 @@ public class Service {
 
             if (battlefield[x][y] == 1) {
                 monitor[x][y] = 2;
-            } else if (monitor[x][y] == 1 && !(count2 < 10 | count1 < 10)) {
+            } else if ((monitor[x][y] == 1 || monitor[x][y] == 2) | !(count2 < 10 | count1 < 10)) {
                 makeTurn(monitor, battlefield);
             } else {
                 System.out.println("Computer miss! Your turn");

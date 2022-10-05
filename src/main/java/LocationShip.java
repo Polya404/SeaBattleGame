@@ -32,9 +32,7 @@ public class LocationShip {
                 System.out.println("Wrong coordinates");
                 continue;
             }
-            arrangingShips(deck, battlefield, x, y);
-            deck--;
-            clearConsole();
+            deck = getDeck(battlefield, deck, x, y);
         }
     }
 
